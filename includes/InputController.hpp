@@ -26,8 +26,19 @@ class InputController
 										InputController( InputController const &src );
 										~InputController( void );
 		InputController					&operator=( InputController const &rhs );
-	
-	// Public variables
+
+		// Public variables
+		std::ifstream					CurrentFile;
+
+		std::string						ProgramString;
+
+		// Public Methods
+		void							GetInput(int argc, char **argv);
+		std::string						ReadFromFile(std::string path);
+		std::string						ReadFromStdIn();
+		std::string						CleanInputFromStdIn();
+
+		void							LexInput();
 
 // TODO: to be continued.
 //		void Lexer();

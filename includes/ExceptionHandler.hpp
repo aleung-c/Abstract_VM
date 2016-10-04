@@ -13,15 +13,77 @@
 #include "AbstractVM.hpp"
 
 /*
-**	Special exception handling.
+**	Special exceptions handling.
 */
 
-class MyExceptions: public std::exception
+class FileOpeningError: public std::exception
 {
 	public:
-		class NullvarDetected
-		{
-			public:
-				virtual const char	*what() const throw();
-		};
+		virtual const char	*what() const throw();
+};
+
+class FileReadingError: public std::exception
+{
+	public:
+		virtual const char	*what() const throw();
+};
+
+class NullvarDetected: public std::exception
+{
+	public:
+		virtual const char	*what() const throw();
+};
+
+class LexicalError: public std::exception
+{
+	public:
+		virtual const char	*what() const throw();
+};
+
+class UnknownInstruction: public std::exception
+{
+	public:
+		virtual const char	*what() const throw();
+};
+
+class ValueOverflow: public std::exception
+{
+	public:
+		virtual const char	*what() const throw();
+};
+
+class ValueUnderflow: public std::exception
+{
+	public:
+		virtual const char	*what() const throw();
+};
+
+class EmptyStack: public std::exception
+{
+	public:
+		virtual const char	*what() const throw();
+};
+
+class ZeroDiv: public std::exception
+{
+	public:
+		virtual const char	*what() const throw();
+};
+
+class NoExit: public std::exception
+{
+	public:
+		virtual const char	*what() const throw();
+};
+
+class TrueAssertion: public std::exception
+{
+	public:
+		virtual const char	*what() const throw();
+};
+
+class StackLessThanTwo: public std::exception
+{
+	public:
+		virtual const char	*what() const throw();
 };

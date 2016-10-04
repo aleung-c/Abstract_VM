@@ -21,8 +21,7 @@ int main(int argc, char **argv)
 		VMController	MainVMContoller;
 
 		MainVMContoller.SetVMSettings(VMSettings);
-		MainVMContoller.Run(argc, argv);
+		return (MainVMContoller.Run(argc, argv));
 	}
-
 	return (0);
 }

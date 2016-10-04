@@ -15,12 +15,10 @@
 VMController::VMController( void )
 {
 	std::cout << "Initializing Virtual Machine ..." << std::endl;
-
 }
 
 VMController::VMController( VMController const &src )
 {
-
 
 }
 
@@ -40,11 +38,23 @@ VMController		&VMController::operator=( VMController const &rhs )
 int					VMController::Run(int argc, char **argv)
 {
 	if (argc != -1 && argv)
-		std::cout << "*Virtual Machine starts running*" << std::endl; 
+	{
+		std::cout << "*Virtual Machine starts running*" << std::endl;
+		try
+		{
+			InputController.GetInput(argc, argv);
+			InputController.LexInput();
+			return (0);
+		}
+		catch (std::exception &e)
+		{
+			std::cout << e.what() << std::endl;
+			// TODO: free stuff.
+			return (-1);
+		}
+	}
 	return (0);
 }
-
-
 
 // Getters/Setters
 void				VMController::SetVMSettings(t_avm &Settings)
@@ -58,12 +68,12 @@ void				VMController::SetVMSettings(t_avm &Settings)
 		}
 		else
 		{
-			throw MyExceptions::NullvarDetected();
+			throw NullvarDetected();
 		}
 
 	}
-	catch (MyExceptions::NullvarDetected &e)
+	catch (std::exception &e)
 	{
-		std::cout << e.what();
+		std::cout << e.what() << std::endl;
 	}
 }

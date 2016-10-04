@@ -15,10 +15,13 @@
 
 # include "../libft/libft.h"
 # include <iostream>
+# include <fstream>
+# include <sstream>
 # include <string>
 # include <exception>
+# include <regex>
 
-
+// VM operands
 enum					eOperandType
 {
 	Int8,
@@ -27,6 +30,22 @@ enum					eOperandType
 	Float,
 	Double
 };
+
+
+// Lexer Parser
+
+enum eTokenType
+{
+	Instruction,
+	Value
+};
+
+typedef struct			s_token
+{
+	int					Count;
+	eTokenType			TokenType;
+	std::string			Value;
+}						t_token;
 
 // Struct definition;
 typedef struct			s_avm
