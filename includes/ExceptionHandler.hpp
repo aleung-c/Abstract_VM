@@ -22,6 +22,12 @@ class FileOpeningError: public std::exception
 		virtual const char	*what() const throw();
 };
 
+class MachineInitialisationError: public std::exception
+{
+	public:
+		virtual const char	*what() const throw();
+};
+
 class FileReadingError: public std::exception
 {
 	public:
@@ -40,7 +46,7 @@ class LexicalError: public std::exception
 		virtual const char	*what() const throw();
 };
 
-class UnknownInstruction: public std::exception
+class ParsingError: public std::exception
 {
 	public:
 		virtual const char	*what() const throw();

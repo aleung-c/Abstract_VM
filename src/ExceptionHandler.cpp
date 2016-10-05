@@ -17,6 +17,11 @@ const char *FileOpeningError::what() const throw()
 	return ("File opening error");
 }
 
+const char *MachineInitialisationError::what() const throw()
+{
+	return ("Machine Initialisation Error");
+}
+
 const char *FileReadingError::what() const throw()
 {
 	return ("File Reading error: no end of input found");
@@ -32,9 +37,9 @@ const char *LexicalError::what() const throw()
 	return ("Lexical Error detected");
 }
 
-const char *UnknownInstruction::what() const throw()
+const char *ParsingError::what() const throw()
 {
-	return ("Unknown Instruction in program");
+	return ("Parsing detected errors in program");
 }
 
 const char *ValueOverflow::what() const throw()

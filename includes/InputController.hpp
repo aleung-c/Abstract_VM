@@ -32,17 +32,31 @@ class InputController
 
 		std::string						ProgramString;
 
+		std::list<t_token>				TokenList;
+		t_avm							*VMSettings;
+
 		// Public Methods
+		// Get the input
 		void							GetInput(int argc, char **argv);
 		std::string						ReadFromFile(std::string path);
 		std::string						ReadFromStdIn();
 		std::string						CleanInputFromStdIn();
 
+		// Lex the input
 		void							LexInput();
+		int								LexerCheck();
 
-// TODO: to be continued.
-//		void Lexer();
-//		void Parser();
+		// parse the input
+		void							ParseInput();
+		void							ParseTokenOrder(std::list<t_token>::iterator it, int *nbOfErrors);
+		void							ParseDictionnaryComparison(std::list<t_token>::iterator it, int *nbOfErrors);
+		void							ParseSpecificRules(std::list<t_token>::iterator it, int *nbOfErrors);
+
+		// translate it for machine process;
+		void							TranslateInputToMachineInstruction();
+
+		// Setters / getters
+		void							LinkVMSettings(t_avm *VMSettings);
 
 
 };

@@ -21,6 +21,7 @@ int main(int argc, char **argv)
 		VMController	MainVMContoller;
 
 		MainVMContoller.SetVMSettings(VMSettings);
+		MainVMContoller.InitDictionnaries();
 		return (MainVMContoller.Run(argc, argv));
 	}
 	return (0);

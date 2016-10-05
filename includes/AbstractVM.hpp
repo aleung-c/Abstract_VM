@@ -18,11 +18,12 @@
 # include <fstream>
 # include <sstream>
 # include <string>
+# include <list>
 # include <exception>
 # include <regex>
 
 // VM operands
-enum					eOperandType
+enum									eOperandType
 {
 	Int8,
 	Int16,
@@ -31,29 +32,38 @@ enum					eOperandType
 	Double
 };
 
-
 // Lexer Parser
-
-enum eTokenType
+enum									eTokenType
 {
 	Instruction,
-	Value
+	Value,
+	Error
 };
 
-typedef struct			s_token
+typedef struct							s_token
 {
-	int					Count;
-	eTokenType			TokenType;
-	std::string			Value;
-}						t_token;
+	int									LineNumber;
+	int									NumberInLine;
+	eTokenType							TokenType;
+	std::string							Value;
+}										t_token;
 
-// Struct definition;
-typedef struct			s_avm
+// Instruction Processing
+typedef struct							s_MachineInstruction
 {
+	std::string							Instruction;
+	bool								HasValue;
+	std::string							Value;
+}										t_MachineInstruction;
 
-
-
-}						t_avm;
+// Main Struct definition;
+typedef struct							s_avm
+{
+	// List of Instructions
+	std::list<std::string>				InstructionsTable;
+	std::list<std::string>				ValuesTable;
+	std::list<t_MachineInstruction>		MachineInstructionsSet;
+}										t_avm;
 
 // Class Declarations.
 class IOperand;
@@ -63,8 +73,6 @@ class ExceptionHandler;
 
 
 class VMController;
-
-
 
 #include "IOperand.hpp"
 #include "IOperandController.hpp"

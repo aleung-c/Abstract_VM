@@ -28,6 +28,7 @@ class VMController
 
 
 		// My Public methods
+		void					InitDictionnaries();
 		int						Run(int argc, char **argv);
 
 		// Getters/Setters
