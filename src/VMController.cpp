@@ -14,7 +14,7 @@
 
 VMController::VMController( void )
 {
-	std::cout << KGRN "Initializing Virtual Machine ..." KRESET << std::endl;
+	std::cout << KGRN "Machine main controller Ready" KRESET << std::endl;
 }
 
 VMController::VMController( VMController const &src )
@@ -85,7 +85,7 @@ int					VMController::Run(int argc, char **argv)
 			//												//
 			// ******************************************** //
 
-			// throw calls will be made in these methods.
+			// throw calls will be made in these classes.
 			InputController.LinkVMSettings(VMSettings);
 			InputController.GetInput(argc, argv);
 			InputController.LexInput();
@@ -96,8 +96,8 @@ int					VMController::Run(int argc, char **argv)
 			//	Input Processing							//
 			//												//
 			// ******************************************** //
-
-			// soon.
+			VirtualProcessor.LinkVMSettings(VMSettings);
+			VirtualProcessor.InstructionsReception();
 
 			// ******************************************** //
 			//	Output										//

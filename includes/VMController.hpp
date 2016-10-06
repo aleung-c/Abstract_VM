@@ -39,5 +39,6 @@ class VMController
 
 		// My Controllers
 		InputController			InputController;
+		VirtualProcessor		VirtualProcessor;
 		IOperandController		IOpController;
 };

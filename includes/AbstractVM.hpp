@@ -21,17 +21,18 @@
 # include <list>
 # include <exception>
 # include <regex>
+# include <map>
 
 // color in text;
-#define KNRM  "\x1B[0m"
-#define KRED  "\x1B[31m"
-#define KGRN  "\x1B[32m"
-#define KYEL  "\x1B[33m"
-#define KBLU  "\x1B[34m"
-#define KMAG  "\x1B[35m"
-#define KCYN  "\x1B[36m"
-#define KWHT  "\x1B[37m"
-#define KRESET "\x1B[0m"
+# define KNRM  "\x1B[0m"
+# define KRED  "\x1B[31m"
+# define KGRN  "\x1B[32m"
+# define KYEL  "\x1B[33m"
+# define KBLU  "\x1B[34m"
+# define KMAG  "\x1B[35m"
+# define KCYN  "\x1B[36m"
+# define KWHT  "\x1B[37m"
+# define KRESET "\x1B[0m"
 
 // VM operands
 enum									eOperandType
@@ -68,6 +69,21 @@ typedef struct							s_MachineInstruction
 	std::string							StrValue;
 }										t_MachineInstruction;
 
+
+
+// Class Declarations.
+class IOperand;
+class Int8;
+class Int16;
+class Int32;
+class Float;
+class Double;
+class IOperandController;
+class InputController;
+class VirtualProcessor;
+class ExceptionHandler;
+class VMController;
+
 // Main Struct definition;
 typedef struct							s_avm
 {
@@ -75,24 +91,23 @@ typedef struct							s_avm
 	std::list<std::string>				InstructionsTable;
 	std::list<std::string>				ValuesTable;
 	std::list<t_MachineInstruction>		MachineInstructionsSet;
+
+	std::list<IOperand *>				MachineStack;
 }										t_avm;
 
-// Class Declarations.
-class IOperand;
-class IOperandController;
-class InputController;
-class ExceptionHandler;
+# include "IOperand.hpp"
+# include "Int8.hpp"
+# include "Int16.hpp"
+# include "Int32.hpp"
+# include "Float.hpp"
+# include "Double.hpp"
+# include "IOperandController.hpp"
+# include "InputController.hpp"
+# include "VirtualProcessor.hpp"
+# include "ExceptionHandler.hpp"
 
 
-class VMController;
-
-#include "IOperand.hpp"
-#include "IOperandController.hpp"
-#include "InputController.hpp"
-#include "ExceptionHandler.hpp"
-
-
-#include "VMController.hpp"
+# include "VMController.hpp"
 
 
 #endif

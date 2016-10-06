@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "AbstractVM.hpp"
+
 /*
 **	Factory for the IOperands.
 */
@@ -17,8 +19,21 @@
 class IOperandController
 {
 	public:
-		IOperand const * createOperand( eOperandType type, std::string const & value ) const;
+		
 
+		//IOperand const *(IOperandController::*OperandFunctions[])(std::string const & value) const;
+		typedef IOperand const *(IOperandController::*OperandFunctions)(std::string const & value) const;
+		OperandFunctions OperandFt;
+		//OperandFunctions 	ArrayOfOpFunc[];
+
+		// Default Copplien methods
+								IOperandController( void );
+								IOperandController( IOperandController const &src );
+								~IOperandController( void );
+		IOperandController		&operator=( IOperandController const &rhs );
+
+
+		IOperand const * createOperand( eOperandType type, std::string const & value ) const;
 	private:
 		IOperand const * createInt8( std::string const & value ) const;
 		IOperand const * createInt16( std::string const & value ) const;

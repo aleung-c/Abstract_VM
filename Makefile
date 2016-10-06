@@ -18,7 +18,14 @@ HEADER = includes/AbstractVM.hpp
 SRC = src/main.cpp \
 src/VMController.cpp \
 src/ExceptionHandler.cpp \
-src/InputController.cpp
+src/InputController.cpp \
+src/VirtualProcessor.cpp \
+src/IOperandController.cpp \
+src/Int8.cpp \
+src/Int16.cpp \
+src/Int32.cpp \
+src/Float.cpp \
+src/Double.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

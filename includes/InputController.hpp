@@ -26,7 +26,6 @@ class InputController
 		std::ifstream					CurrentFile;
 		std::string						ProgramString;
 		std::list<t_token>				TokenList;
-		t_avm							*VMSettings;
 
 		// Default Copplien methods
 										InputController( void );
@@ -59,5 +58,7 @@ class InputController
 		// Setters / getters
 		void							LinkVMSettings(t_avm *VMSettings);
 
+	private:
+		t_avm							*VMSettings;
 
 };
