@@ -14,7 +14,7 @@
 
 int main(int argc, char **argv)
 {
-
+	std::cout << KMAG "- AbstractVM Starting -" KRESET << std::endl;
 	if (argc != 0 && argv)
 	{
 		t_avm			VMSettings;

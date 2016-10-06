@@ -14,7 +14,7 @@
 
 VMController::VMController( void )
 {
-	std::cout << "Initializing Virtual Machine ..." << std::endl;
+	std::cout << KGRN "Initializing Virtual Machine ..." KRESET << std::endl;
 }
 
 VMController::VMController( VMController const &src )
@@ -33,8 +33,7 @@ VMController		&VMController::operator=( VMController const &rhs )
 	return (*this);
 }
 
-// Main Control methods
-
+// List of authorized words.
 void				VMController::InitDictionnaries()
 {
 	try
@@ -73,11 +72,12 @@ void				VMController::InitDictionnaries()
 	}
 }
 
+// Main Control methods
 int					VMController::Run(int argc, char **argv)
 {
 	if (argc != -1 && argv)
 	{
-		std::cout << "*Virtual Machine starts running*" << std::endl;
+		std::cout << KBLU "*Virtual Machine starts running*" KRESET << std::endl;
 		try
 		{
 			// ******************************************** //
@@ -90,7 +90,7 @@ int					VMController::Run(int argc, char **argv)
 			InputController.GetInput(argc, argv);
 			InputController.LexInput();
 			InputController.ParseInput();
-			InputController.TranslateInputToMachineInstruction();
+			InputController.TranslateInputIntoMachineInstruction();
 
 			// ******************************************** //
 			//	Input Processing							//
@@ -126,7 +126,7 @@ void				VMController::SetVMSettings(t_avm &Settings)
 		this->VMSettings = &Settings;
 		if (this->VMSettings)
 		{
-			std::cout << "VM setting structure linked" << std::endl;
+			std::cout << KGRN "VM setting structure linked" KRESET << std::endl;
 		}
 		else
 		{

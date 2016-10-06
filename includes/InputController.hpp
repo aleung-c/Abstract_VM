@@ -21,19 +21,18 @@
 class InputController
 {
 	public:
-										// Default Copplien methods
+
+		// Public variables
+		std::ifstream					CurrentFile;
+		std::string						ProgramString;
+		std::list<t_token>				TokenList;
+		t_avm							*VMSettings;
+
+		// Default Copplien methods
 										InputController( void );
 										InputController( InputController const &src );
 										~InputController( void );
 		InputController					&operator=( InputController const &rhs );
-
-		// Public variables
-		std::ifstream					CurrentFile;
-
-		std::string						ProgramString;
-
-		std::list<t_token>				TokenList;
-		t_avm							*VMSettings;
 
 		// Public Methods
 		// Get the input
@@ -46,15 +45,17 @@ class InputController
 		void							LexInput();
 		int								LexerCheck();
 
-		// parse the input
+		// parse the input - 4 steps
 		void							ParseInput();
 		void							ParseTokenOrder(std::list<t_token>::iterator it, int *nbOfErrors);
 		void							ParseDictionnaryComparison(std::list<t_token>::iterator it, int *nbOfErrors);
 		void							ParseSpecificRules(std::list<t_token>::iterator it, int *nbOfErrors);
+		void							ParseValuesRules(std::list<t_token>::iterator it, int *nbOfErrors);
 
 		// translate it for machine process;
-		void							TranslateInputToMachineInstruction();
-
+		void							TranslateInputIntoMachineInstruction();
+		eOperandType					GetOperandTypeOfValue(t_token	&ValueToken);
+		std::string						GetStringValueOfValue(t_token	&ValueToken);
 		// Setters / getters
 		void							LinkVMSettings(t_avm *VMSettings);
 

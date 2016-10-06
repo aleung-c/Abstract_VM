@@ -16,6 +16,8 @@
 **	Special exceptions handling.
 */
 
+// TODO : change it into heriting std::runtime for maximum points.
+
 class FileOpeningError: public std::exception
 {
 	public:
