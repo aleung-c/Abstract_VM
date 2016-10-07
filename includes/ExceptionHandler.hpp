@@ -18,80 +18,80 @@
 
 // TODO : change it into heriting std::runtime for maximum points.
 
-class FileOpeningError: public std::exception
+class FileOpeningError: public std::runtime_error
 {
 	public:
-		virtual const char	*what() const throw();
+		FileOpeningError(const std::string& what_arg);
 };
 
-class MachineInitialisationError: public std::exception
+class MachineInitialisationError: public std::runtime_error
 {
 	public:
-		virtual const char	*what() const throw();
+		MachineInitialisationError(const std::string& what_arg);
 };
 
-class FileReadingError: public std::exception
+class FileReadingError: public std::runtime_error
 {
 	public:
-		virtual const char	*what() const throw();
+		FileReadingError(const std::string& what_arg);
 };
 
-class NullvarDetected: public std::exception
+class NullvarDetected: public std::runtime_error
 {
 	public:
-		virtual const char	*what() const throw();
+		NullvarDetected(const std::string& what_arg);
 };
 
-class LexicalError: public std::exception
+class LexicalError: public std::runtime_error
 {
 	public:
-		virtual const char	*what() const throw();
+		LexicalError(const std::string& what_arg);
 };
 
-class ParsingError: public std::exception
+class ParsingError: public std::runtime_error
 {
 	public:
-		virtual const char	*what() const throw();
+		ParsingError(const std::string& what_arg);
 };
 
-class ValueOverflow: public std::exception
+class ValueOverflow: public std::runtime_error
 {
 	public:
-		virtual const char	*what() const throw();
+		ValueOverflow(const std::string& what_arg);
 };
 
-class ValueUnderflow: public std::exception
+class ValueUnderflow: public std::runtime_error
 {
 	public:
-		virtual const char	*what() const throw();
+		ValueUnderflow(const std::string& what_arg);
 };
 
-class EmptyStack: public std::exception
+class EmptyStack: public std::runtime_error
 {
 	public:
-		virtual const char	*what() const throw();
+		EmptyStack(const std::string& what_arg);
 };
 
-class ZeroDiv: public std::exception
+class ZeroDiv: public std::runtime_error
 {
 	public:
-		virtual const char	*what() const throw();
+		ZeroDiv(const std::string& what_arg);
 };
 
-class NoExit: public std::exception
+class NoExit: public std::runtime_error
 {
 	public:
-		virtual const char	*what() const throw();
+		NoExit(const std::string& what_arg);
 };
 
-class TrueAssertion: public std::exception
+class TrueAssertion: public std::runtime_error
 {
 	public:
-		virtual const char	*what() const throw();
+		TrueAssertion(const std::string& what_arg);
 };
 
-class StackLessThanTwo: public std::exception
+class StackLessThanTwo: public std::runtime_error
 {
 	public:
-		virtual const char	*what() const throw();
+		StackLessThanTwo(const std::string& what_arg);
 };

@@ -12,68 +12,68 @@
 
 #include "../includes/AbstractVM.hpp"
 
-const char *FileOpeningError::what() const throw()
+FileOpeningError::FileOpeningError(const std::string& what_arg) : std::runtime_error(what_arg)
 {
-	return ("File opening error");
+	
 }
 
-const char *MachineInitialisationError::what() const throw()
+MachineInitialisationError::MachineInitialisationError(const std::string& what_arg) : std::runtime_error(what_arg)
 {
-	return ("Machine Initialisation Error");
+	
 }
 
-const char *FileReadingError::what() const throw()
+FileReadingError::FileReadingError(const std::string& what_arg) : std::runtime_error(what_arg)
 {
-	return ("File Reading error: no end of input found");
+	
 }
 
-const char *NullvarDetected::what() const throw()
+NullvarDetected::NullvarDetected(const std::string& what_arg) : std::runtime_error(what_arg)
 {
-	return ("Nullvar detected");
+	
 }
 
-const char *LexicalError::what() const throw()
+LexicalError::LexicalError(const std::string& what_arg) : std::runtime_error(what_arg)
 {
-	return ("Lexical Error detected");
+	
 }
 
-const char *ParsingError::what() const throw()
+ParsingError::ParsingError(const std::string& what_arg) : std::runtime_error(what_arg)
 {
-	return ("Parsing detected errors in program");
+	
 }
 
-const char *ValueOverflow::what() const throw()
+ValueOverflow::ValueOverflow(const std::string& what_arg) : std::runtime_error(what_arg)
 {
-	return ("Value Overflow detected");
+	
 }
 
-const char *ValueUnderflow::what() const throw()
+ValueUnderflow::ValueUnderflow(const std::string& what_arg) : std::runtime_error(what_arg)
 {
-	return ("Value Underflow detected");
+	
 }
 
-const char *EmptyStack::what() const throw()
+EmptyStack::EmptyStack(const std::string& what_arg) : std::runtime_error(what_arg)
 {
-	return ("Stack is Empty");
+	
 }
 
-const char *ZeroDiv::what() const throw()
+ZeroDiv::ZeroDiv(const std::string& what_arg) : std::runtime_error(what_arg)
 {
-	return ("Division by zero is impossible");
+	
 }
 
-const char *NoExit::what() const throw()
+NoExit::NoExit(const std::string& what_arg) : std::runtime_error(what_arg)
 {
-	return ("Program doesnt have a exit instruction");
+	
 }
 
-const char *TrueAssertion::what() const throw()
+TrueAssertion::TrueAssertion(const std::string& what_arg) : std::runtime_error(what_arg)
 {
-	return ("Assert is always true");
+	
 }
 
 
-const char *StackLessThanTwo::what() const throw()
+StackLessThanTwo::StackLessThanTwo(const std::string& what_arg) : std::runtime_error(what_arg)
 {
-	return ("Operation on a stack that has less than two values is impossible");
+	
 }

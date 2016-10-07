@@ -14,6 +14,10 @@
 
 class VirtualProcessor
 {
+	typedef void (VirtualProcessor::*VPFunctions)(t_MachineInstruction &CurInst);
+	VPFunctions Process[11];
+	std::map<std::string, int> InstructionsMap;
+
 	public:
 						// Default Copplien methods
 							VirtualProcessor( void );
@@ -23,10 +27,26 @@ class VirtualProcessor
 
 
 	void					InstructionsReception();
+
+	// Instructions functions;
+	void					ProcessPush(t_MachineInstruction &CurInstr);
+	void					ProcessPop(t_MachineInstruction &CurInstr);
+	void					ProcessDump(t_MachineInstruction &CurInstr);
+	void					ProcessAssert(t_MachineInstruction &CurInstr);
+	void					ProcessAdd(t_MachineInstruction &CurInstr);
+	void					ProcessSub(t_MachineInstruction &CurInstr);
+	void					ProcessMul(t_MachineInstruction &CurInstr);
+	void					ProcessDiv(t_MachineInstruction &CurInstr);
+	void					ProcessMod(t_MachineInstruction &CurInstr);
+	void					ProcessPrint(t_MachineInstruction &CurInstr);
+	void					ProcessExit(t_MachineInstruction &CurInstr);
+	
 	//getters / setters
 	void					LinkVMSettings(t_avm *VMSettings);
 
+
+
 	private:
-		IOperandController		IOperandController;
+		//IOperandController		IOperandController; // now singleton.
 		t_avm					*VMSettings;
 };

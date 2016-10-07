@@ -40,5 +40,5 @@ class VMController
 		// My Controllers
 		InputController			InputController;
 		VirtualProcessor		VirtualProcessor;
-		IOperandController		IOpController;
+		//IOperandController		IOpController; // present in the virtual processor;
 };

@@ -12,28 +12,17 @@
 
 #include "../includes/AbstractVM.hpp"
 
+// singleton pattern
+IOperandController IOperandController::m_instance=IOperandController();
+
 IOperandController::IOperandController( void )
 {
-	std::cout << KGRN "IOperandController initialized" KRESET << std::endl;
-	/*OperandFunctions =
-	{
-		&IOperandController::createInt8,
-		&IOperandController::createInt16,
-		&IOperandController::createInt32,
-		&IOperandController::createFloat,
-		&IOperandController::createInt8,
-	};*/
-
-	OperandFt = &IOperandController::createInt8;
-
-	/*ArrayOfOpFunc[0] = OperandFunctions[0];
-	ArrayOfOpFunc[1] = OperandFunctions[1];
-	ArrayOfOpFunc[2] = OperandFunctions[2];
-	ArrayOfOpFunc[3] = OperandFunctions[3];
-	ArrayOfOpFunc[4] = OperandFunctions[4];*/
-	//(*OperandFt)("hey");
-	//(*OperandFunctions[0])("value");
-	//(*OperandFunctions[0])("value");
+	OperandFt[0] = &IOperandController::createInt8;
+	OperandFt[1] = &IOperandController::createInt16;
+	OperandFt[2] = &IOperandController::createInt32;
+	OperandFt[3] = &IOperandController::createFloat;
+	OperandFt[4] = &IOperandController::createDouble;
+	std::cout << KGRN "IOperandController factory initialized" KRESET << std::endl;
 }
 
 IOperandController::IOperandController( IOperandController const &src )
@@ -52,28 +41,58 @@ IOperandController		&IOperandController::operator=( IOperandController const &rh
 	return (*this);
 }
 
+// singleton pattern
+IOperandController& IOperandController::Instance()
+{
+    return m_instance;
+}
+
+
+IOperand const * IOperandController::createOperand( eOperandType type, std::string const & value ) const
+{
+	IOperand const *RetOperand = (*this.*OperandFt[type])(value);
+	return (RetOperand);
+}
+
 IOperand const * IOperandController::createInt8( std::string const & value ) const
 {
-	std::cout << "creating int8" << std::endl;
-	return (NULL);
+	class Int8			*retOperand = new class Int8();
+	double				retVal;
+
+	retOperand->StringValue = value;
+	retVal = std::strtod(value.c_str(), 0);
+	std::cout << "creating int8: " << retVal << std::endl;
+	if (retVal > 127)
+	{
+		throw ValueOverflow("Value overflow");
+	}
+	else if (retVal < -128)
+	{
+		throw ValueUnderflow("Value underflow");
+	}
+	return (retOperand);
 }
 
 IOperand const * IOperandController::createInt16( std::string const & value ) const
 {
+	std::cout << "creating int16" << std::endl;
 	return (NULL);
 }
 
 IOperand const * IOperandController::createInt32( std::string const & value ) const
 {
+	std::cout << "creating int32" << std::endl;
 	return (NULL);
 }
 
 IOperand const * IOperandController::createFloat( std::string const & value ) const
 {
+	std::cout << "creating Float" << std::endl;
 	return (NULL);
 }
 
 IOperand const * IOperandController::createDouble( std::string const & value ) const
 {
+	std::cout << "creating Double" << std::endl;
 	return (NULL);
 }

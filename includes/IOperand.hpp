@@ -21,9 +21,12 @@
 **	Double
 */
 
+#include "AbstractVM.hpp"
+
 class IOperand {
 	
 	public:
+	std::string							StringValue;
 	
 	virtual int							getPrecision( void ) const = 0;						// Precision of the type of the instance
 	virtual eOperandType				getType( void ) const = 0;							// Type of the instance

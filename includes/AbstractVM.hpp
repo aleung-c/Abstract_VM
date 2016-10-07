@@ -34,6 +34,8 @@
 # define KWHT  "\x1B[37m"
 # define KRESET "\x1B[0m"
 
+
+
 // VM operands
 enum									eOperandType
 {
@@ -92,8 +94,10 @@ typedef struct							s_avm
 	std::list<std::string>				ValuesTable;
 	std::list<t_MachineInstruction>		MachineInstructionsSet;
 
-	std::list<IOperand *>				MachineStack;
+	std::list<IOperand const*>			MachineStack;
 }										t_avm;
+
+extern IOperandController g_OperandFactory;
 
 # include "IOperand.hpp"
 # include "Int8.hpp"

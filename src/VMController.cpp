@@ -62,7 +62,7 @@ void				VMController::InitDictionnaries()
 		}
 		else
 		{
-			throw MachineInitialisationError();
+			throw MachineInitialisationError("Dictionnaries initialization error");
 		}
 	}
 	catch (std::exception &e)
@@ -108,7 +108,7 @@ int					VMController::Run(int argc, char **argv)
 
 			return (0);
 		}
-		catch (std::exception &e)
+		catch (std::runtime_error &e)
 		{
 			std::cout << e.what() << std::endl;
 			// TODO: free stuff.
@@ -130,7 +130,7 @@ void				VMController::SetVMSettings(t_avm &Settings)
 		}
 		else
 		{
-			throw NullvarDetected();
+			throw NullvarDetected("NULL variable detected");
 		}
 
 	}

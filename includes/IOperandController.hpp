@@ -20,11 +20,10 @@ class IOperandController
 {
 	public:
 		
-
-		//IOperand const *(IOperandController::*OperandFunctions[])(std::string const & value) const;
+		static IOperandController& Instance(); // Singleton Pattern;
+		
 		typedef IOperand const *(IOperandController::*OperandFunctions)(std::string const & value) const;
-		OperandFunctions OperandFt;
-		//OperandFunctions 	ArrayOfOpFunc[];
+		OperandFunctions OperandFt[5];
 
 		// Default Copplien methods
 								IOperandController( void );
@@ -35,6 +34,8 @@ class IOperandController
 
 		IOperand const * createOperand( eOperandType type, std::string const & value ) const;
 	private:
+		static IOperandController m_instance; // singleton pattern
+
 		IOperand const * createInt8( std::string const & value ) const;
 		IOperand const * createInt16( std::string const & value ) const;
 		IOperand const * createInt32( std::string const & value ) const;

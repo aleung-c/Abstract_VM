@@ -79,7 +79,7 @@ std::string			InputController::ReadFromFile(std::string path)
 	}
 	else
 	{
-		throw FileOpeningError();
+		throw FileOpeningError("File opening error");
 	}
 }
 
@@ -178,7 +178,7 @@ void				InputController::LexInput()
 	}*/
 	// check and display lexical errors.
 	if (LexerCheck() != 0)
-		throw LexicalError();
+		throw LexicalError("Lexical error");
 }
 
 // first pass of check : everything has been tokenized. if some of these token are errors. we stop here.
@@ -221,7 +221,7 @@ void				InputController::ParseInput()
 	}
 	if (nbOfErrors != 0)
 	{
-		throw ParsingError();
+		throw ParsingError("Parser error");
 	}
 	std::cout << KGRN "Program parsed -> OK for process" KRESET << std::endl;
 	return ; // All green -> Go to translate into machine instruction;
@@ -514,7 +514,7 @@ eOperandType	InputController::GetOperandTypeOfValue(t_token	&ValueToken)
 	}
 	else
 	{
-		throw ParsingError();
+		throw ParsingError("Parser error");
 	}
 	return (Double);
 
@@ -546,6 +546,6 @@ void				InputController::LinkVMSettings(t_avm *VMSettings)
 	this->VMSettings = VMSettings;
 	if (!this->VMSettings)
 	{
-		throw NullvarDetected();
+		throw NullvarDetected("NULL variable detected");
 	}
 }
