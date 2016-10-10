@@ -46,46 +46,118 @@ eOperandType				Int8::getType( void ) const
 
 IOperand const				*Int8::operator+( IOperand const & rhs ) const
 {
-	double		lhsVal;
-	double		rhsVal;
-	double		result;
-
-	std::stringstream ss;
-	//ss << a;
+	double					lhsVal;
+	double					rhsVal;
+	double					result;
+	std::stringstream		ss;
+	IOperand				*ret;
 
 	lhsVal = std::strtod(this->StringValue.c_str(), 0);
 	rhsVal = std::strtod(rhs.StringValue.c_str(), 0);
 	result = lhsVal + rhsVal;
 	ss << result;
-	//retOperand.StringValue = ss.str();
 	if (getType() < rhs.getType())
 	{
-		return (&rhs);
+		return (IOperandController::Instance().createOperand(rhs.getType(),  ss.str()));
 	}
 	else
 	{
-		return (this);
+		return (IOperandController::Instance().createOperand(this->getType(),  ss.str()));
 	}
+	return (ret);
 }
 
 IOperand const				*Int8::operator-( IOperand const & rhs ) const
 {
-	return (NULL);
+	double					lhsVal;
+	double					rhsVal;
+	double					result;
+	std::stringstream		ss;
+	IOperand				*ret;
+
+	lhsVal = std::strtod(this->StringValue.c_str(), 0);
+	rhsVal = std::strtod(rhs.StringValue.c_str(), 0);
+	result = lhsVal - rhsVal;
+	ss << result;
+	if (getType() < rhs.getType())
+	{
+		return (IOperandController::Instance().createOperand(rhs.getType(),  ss.str()));
+	}
+	else
+	{
+		return (IOperandController::Instance().createOperand(this->getType(),  ss.str()));
+	}
+	return (ret);
 }
 	
 IOperand const				*Int8::operator*( IOperand const & rhs ) const
 {
-	return (NULL);
+	double					lhsVal;
+	double					rhsVal;
+	double					result;
+	std::stringstream		ss;
+	IOperand				*ret;
+
+	lhsVal = std::strtod(this->StringValue.c_str(), 0);
+	rhsVal = std::strtod(rhs.StringValue.c_str(), 0);
+	result = lhsVal * rhsVal;
+	ss << result;
+	if (getType() < rhs.getType())
+	{
+		return (IOperandController::Instance().createOperand(rhs.getType(),  ss.str()));
+	}
+	else
+	{
+		return (IOperandController::Instance().createOperand(this->getType(),  ss.str()));
+	}
+	return (ret);
 }
 
 IOperand const				*Int8::operator/( IOperand const & rhs ) const
 {
-	return (NULL);
+	double					lhsVal;
+	double					rhsVal;
+	double					result;
+	std::stringstream		ss;
+	IOperand				*ret;
+
+	lhsVal = std::strtod(this->StringValue.c_str(), 0);
+	rhsVal = std::strtod(rhs.StringValue.c_str(), 0);
+	result = lhsVal / rhsVal;
+	ss << result;
+	if (getType() < rhs.getType())
+	{
+		return (IOperandController::Instance().createOperand(rhs.getType(),  ss.str()));
+	}
+	else
+	{
+		return (IOperandController::Instance().createOperand(this->getType(),  ss.str()));
+	}
+	return (ret);
 }
 
 IOperand const				*Int8::operator%( IOperand const & rhs ) const
 {
-	return (NULL);
+	double					lhsVal;
+	double					rhsVal;
+	double					result;
+	std::stringstream		ss;
+	IOperand				*ret;
+
+	lhsVal = std::strtod(this->StringValue.c_str(), 0);
+	rhsVal = std::strtod(rhs.StringValue.c_str(), 0);
+	result = fmod(lhsVal,rhsVal);
+	
+	ss << result;
+	if (getType() < rhs.getType())
+	{
+		return (IOperandController::Instance().createOperand(rhs.getType(),  ss.str()));
+	}
+	else
+	{
+		return (IOperandController::Instance().createOperand(this->getType(),  ss.str()));
+	}
+	return (ret);
 }
 	
 std::string const			&Int8::toString( void ) const

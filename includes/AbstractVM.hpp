@@ -22,6 +22,8 @@
 # include <exception>
 # include <regex>
 # include <map>
+# include <math.h>
+# include <limits.h>
 
 // color in text;
 # define KNRM  "\x1B[0m"

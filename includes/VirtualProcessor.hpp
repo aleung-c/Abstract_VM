@@ -14,9 +14,11 @@
 
 class VirtualProcessor
 {
-	typedef void (VirtualProcessor::*VPFunctions)(t_MachineInstruction &CurInst);
-	VPFunctions Process[11];
-	std::map<std::string, int> InstructionsMap;
+	typedef void					(VirtualProcessor::*VPFunctions)
+										(t_MachineInstruction &CurInst);
+	VPFunctions						Process[11];
+	std::map<std::string, int>		InstructionsMap;
+	bool							ExitInstructionReceived;
 
 	public:
 						// Default Copplien methods

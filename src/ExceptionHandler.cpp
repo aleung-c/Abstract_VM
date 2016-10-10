@@ -67,13 +67,17 @@ NoExit::NoExit(const std::string& what_arg) : std::runtime_error(what_arg)
 	
 }
 
-TrueAssertion::TrueAssertion(const std::string& what_arg) : std::runtime_error(what_arg)
+FalseAssertion::FalseAssertion(const std::string& what_arg) : std::runtime_error(what_arg)
 {
 	
 }
 
-
 StackLessThanTwo::StackLessThanTwo(const std::string& what_arg) : std::runtime_error(what_arg)
+{
+	
+}
+
+NotAnInteger8::NotAnInteger8(const std::string& what_arg) : std::runtime_error(what_arg)
 {
 	
 }

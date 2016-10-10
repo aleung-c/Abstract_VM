@@ -61,38 +61,90 @@ IOperand const * IOperandController::createInt8( std::string const & value ) con
 
 	retOperand->StringValue = value;
 	retVal = std::strtod(value.c_str(), 0);
-	std::cout << "creating int8: " << retVal << std::endl;
+	//std::cout << "creating int8: " << retVal << std::endl;
 	if (retVal > 127)
 	{
-		throw ValueOverflow("Value overflow");
+		throw ValueOverflow("Error: Int8 Value overflow");
 	}
 	else if (retVal < -128)
 	{
-		throw ValueUnderflow("Value underflow");
+		throw ValueUnderflow("Error: Int8 Value underflow");
 	}
 	return (retOperand);
 }
 
 IOperand const * IOperandController::createInt16( std::string const & value ) const
 {
-	std::cout << "creating int16" << std::endl;
-	return (NULL);
+	class Int16			*retOperand = new class Int16();
+	double				retVal;
+
+	retOperand->StringValue = value;
+	retVal = std::strtod(value.c_str(), 0);
+	//std::cout << "creating int16" << std::endl;
+	if (retVal > 32767)
+	{
+		throw ValueOverflow("Error: Int16 Value overflow");
+	}
+	else if (retVal < -32768)
+	{
+		throw ValueUnderflow("Error: Int16 Value underflow");
+	}
+	return (retOperand);
 }
 
 IOperand const * IOperandController::createInt32( std::string const & value ) const
 {
-	std::cout << "creating int32" << std::endl;
-	return (NULL);
+	class Int32			*retOperand = new class Int32();
+	double				retVal;
+
+	retOperand->StringValue = value;
+	retVal = std::strtod(value.c_str(), 0);
+	//std::cout << "creating int16" << std::endl;
+	if (retVal > 2147483647)
+	{
+		throw ValueOverflow("Error: Int32 Value overflow");
+	}
+	else if (retVal < -2147483648)
+	{
+		throw ValueUnderflow("Error: Int32 Value underflow");
+	}
+	return (retOperand);
 }
 
 IOperand const * IOperandController::createFloat( std::string const & value ) const
 {
-	std::cout << "creating Float" << std::endl;
-	return (NULL);
+	class Float			*retOperand = new class Float();
+	double				retVal;
+
+	retOperand->StringValue = value;
+	retVal = std::strtod(value.c_str(), 0);
+	//std::cout << "creating int16" << std::endl;
+	if (retVal > std::numeric_limits<float>::max())
+	{
+		throw ValueOverflow("Error: Float Value overflow");
+	}
+	else if (retVal < std::numeric_limits<float>::lowest())
+	{
+		throw ValueUnderflow("Error: Float Value underflow");
+	}
+	return (retOperand);
 }
 
 IOperand const * IOperandController::createDouble( std::string const & value ) const
 {
-	std::cout << "creating Double" << std::endl;
-	return (NULL);
+	class Double			*retOperand = new class Double();
+	double					retVal;
+
+	retOperand->StringValue = value;
+	retVal = std::strtod(value.c_str(), 0);
+	//std::cout << "creating int16" << std::endl;
+	if (retVal > std::numeric_limits<double>::max())
+	{
+		throw ValueOverflow("Error: Double Value overflow");
+	}
+	else if (retVal < std::numeric_limits<double>::lowest())
+	{
+		throw ValueUnderflow("Error: Double Value underflow");
+	}
+	return (retOperand);
 }

@@ -452,7 +452,7 @@ void				InputController::TranslateInputIntoMachineInstruction()
 	}
 
 	// Display each machine instruction for debug.
-	std::cout << std::endl << KYEL " // List of machine instructions ----------- //" KRESET << std::endl;
+	/*std::cout << std::endl << KYEL " // List of machine instructions ----------- //" KRESET << std::endl;
 	for (std::list<t_MachineInstruction>::iterator it = VMSettings->MachineInstructionsSet.begin();
 		it != VMSettings->MachineInstructionsSet.end(); it++)
 	{
@@ -487,7 +487,7 @@ void				InputController::TranslateInputIntoMachineInstruction()
 			std::cout << std::endl;
 		}
 	}
-	std::cout << KYEL " // END - List of machine instructions ---- //" KRESET << std::endl;
+	std::cout << KYEL " // END - List of machine instructions ---- //" KRESET << std::endl;*/
 
 }
 
@@ -507,9 +507,9 @@ eOperandType	InputController::GetOperandTypeOfValue(t_token	&ValueToken)
 			return (Int16);
 		else if (valueType == "int32")
 			return (Int32);
-		else if (valueType == "Float")
+		else if (valueType == "float")
 			return (Float);
-		else
+		else if (valueType == "double")
 			return (Double);
 	}
 	else

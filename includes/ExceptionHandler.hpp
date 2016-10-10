@@ -16,7 +16,6 @@
 **	Special exceptions handling.
 */
 
-// TODO : change it into heriting std::runtime for maximum points.
 
 class FileOpeningError: public std::runtime_error
 {
@@ -84,14 +83,20 @@ class NoExit: public std::runtime_error
 		NoExit(const std::string& what_arg);
 };
 
-class TrueAssertion: public std::runtime_error
+class FalseAssertion: public std::runtime_error
 {
 	public:
-		TrueAssertion(const std::string& what_arg);
+		FalseAssertion(const std::string& what_arg);
 };
 
 class StackLessThanTwo: public std::runtime_error
 {
 	public:
 		StackLessThanTwo(const std::string& what_arg);
+};
+
+class NotAnInteger8: public std::runtime_error
+{
+	public:
+		NotAnInteger8(const std::string& what_arg);
 };

@@ -99,13 +99,6 @@ int					VMController::Run(int argc, char **argv)
 			VirtualProcessor.LinkVMSettings(VMSettings);
 			VirtualProcessor.InstructionsReception();
 
-			// ******************************************** //
-			//	Output										//
-			//												//
-			// ******************************************** //
-
-			// soon.
-
 			return (0);
 		}
 		catch (std::runtime_error &e)

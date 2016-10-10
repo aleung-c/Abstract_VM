@@ -33,5 +33,4 @@ class Int8 : public IOperand
 	IOperand const				*operator%( IOperand const & rhs ) const;			// Modulo
 
 	std::string const			&toString( void ) const;				// String representation of the instance
-
 };
