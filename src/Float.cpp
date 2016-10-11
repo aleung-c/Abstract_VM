@@ -162,6 +162,5 @@ IOperand const				*Float::operator%( IOperand const & rhs ) const
 	
 std::string const			&Float::toString( void ) const
 {
-	std::string const &retval = *(new std::string(this->StringValue));
-	return ((retval));
+	return (this->StringValue);
 }

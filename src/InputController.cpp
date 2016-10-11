@@ -276,6 +276,18 @@ void				InputController::ParseTokenOrder(std::list<t_token>::iterator it, int *n
 				<< (*it).Value << " " << (*next).Value  << "\"" << std::endl;
 			}
 		}
+		// Rule 4 after a value, no instruction possible;
+		if (next != TokenList.end())
+		{
+			if ((*next).LineNumber == (*it).LineNumber
+				&& (*next).TokenType == Instruction)
+			{
+				*nbOfErrors += 1;
+				std::cout << "Line " << (*it).LineNumber << " col "
+				<< (*it).NumberInLine << ": Cannot have instruction after values on the same line: \""
+				<< (*it).Value << " " << (*next).Value  << "\"" << std::endl;
+			}
+		}
 	}
 }
 
@@ -367,6 +379,14 @@ void				InputController::ParseValuesRules(std::list<t_token>::iterator it, int *
 		//std::cout << "Type = " << valueType << std::endl;
 		//std::cout << "captured value = " << valueString << std::endl;
 
+		// empty value checking
+		if (valueString == "")
+		{
+			*nbOfErrors += 1;
+			std::cout << "Line " << (*it).LineNumber << " col "
+			<< (*it).NumberInLine << ": Value is empty: \""
+			<< (*it).Value << " " << "\"" << std::endl;
+		}
 		// Int8 checks
 		if ((std::string)valueType == "int8")
 		{

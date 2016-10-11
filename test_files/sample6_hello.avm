@@ -1,0 +1,13 @@
+; Let's write "hello"
+push int8(72) ; h
+print
+push int8(101) ; e
+print
+push int8(108) ; l
+print
+push int8(108) ; l
+print
+push int8(111) ; o
+print
+;dump
+exit

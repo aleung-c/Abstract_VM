@@ -50,6 +50,11 @@ void				VMController::InitDictionnaries()
 			VMSettings->InstructionsTable.push_back("mul");
 			VMSettings->InstructionsTable.push_back("div");
 			VMSettings->InstructionsTable.push_back("mod");
+			// bonus
+			VMSettings->InstructionsTable.push_back("sin");
+			VMSettings->InstructionsTable.push_back("cos");
+			VMSettings->InstructionsTable.push_back("tan");
+			// bonus - end;
 			VMSettings->InstructionsTable.push_back("print");
 			VMSettings->InstructionsTable.push_back("exit");
 
@@ -65,7 +70,7 @@ void				VMController::InitDictionnaries()
 			throw MachineInitialisationError("Dictionnaries initialization error");
 		}
 	}
-	catch (std::exception &e)
+	catch (MachineInitialisationError &e)
 	{
 		std::cout << e.what() << std::endl;
 		exit(-1);
@@ -84,7 +89,6 @@ int					VMController::Run(int argc, char **argv)
 			//	Input Handling								//
 			//												//
 			// ******************************************** //
-
 			// throw calls will be made in these classes.
 			InputController.LinkVMSettings(VMSettings);
 			InputController.GetInput(argc, argv);
@@ -101,14 +105,71 @@ int					VMController::Run(int argc, char **argv)
 
 			return (0);
 		}
-		catch (std::runtime_error &e)
+		// Personalized exceptions catching;
+		catch (FileOpeningError &e)
 		{
-			std::cout << e.what() << std::endl;
-			// TODO: free stuff.
-			return (-1);
+			return (PrintException(e));
+		}
+		catch (FileReadingError &e)
+		{
+			return (PrintException(e));
+		}
+		catch (NullvarDetected &e)
+		{
+			return (PrintException(e));
+		}
+		catch (LexicalError &e)
+		{
+			return (PrintException(e));
+		}
+		catch (ParsingError &e)
+		{
+			return (PrintException(e));
+		}
+		catch (ValueOverflow &e)
+		{
+			return (PrintException(e));
+		}
+		catch (ValueUnderflow &e)
+		{
+			return (PrintException(e));
+		}
+		catch (EmptyStack &e)
+		{
+			return (PrintException(e));
+		}
+		catch (ZeroDiv &e)
+		{
+			return (PrintException(e));
+		}
+		catch (NoExit &e)
+		{
+			return (PrintException(e));
+		}
+		catch (FalseAssertion &e)
+		{
+			return (PrintException(e));
+		}
+		catch (StackLessThanTwo &e)
+		{
+			return (PrintException(e));
+		}
+		catch (NotAnInteger8 &e)
+		{
+			return (PrintException(e));
+		}
+		catch (NotADouble &e)
+		{
+			return (PrintException(e));
 		}
 	}
 	return (0);
+}
+
+int			VMController::PrintException(std::runtime_error &e)
+{
+	std::cout << KRED << "Error: " << KRESET << e.what() << std::endl;
+	return (-1);
 }
 
 // Getters/Setters
@@ -127,8 +188,8 @@ void				VMController::SetVMSettings(t_avm &Settings)
 		}
 
 	}
-	catch (std::exception &e)
+	catch (NullvarDetected &e)
 	{
-		std::cout << e.what() << std::endl;
+		PrintException(e);
 	}
 }

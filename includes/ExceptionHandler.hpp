@@ -100,3 +100,9 @@ class NotAnInteger8: public std::runtime_error
 	public:
 		NotAnInteger8(const std::string& what_arg);
 };
+
+class NotADouble: public std::runtime_error
+{
+	public:
+		NotADouble(const std::string& what_arg);
+};

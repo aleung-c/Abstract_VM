@@ -5,12 +5,12 @@ push int8(5)
 push int32(5)
 push int8(5)
 push int32(5)
-;dump
+dump
 add
 ;dump
 sub
 div
 mul
 mod
-;dump
+dump
 exit;;

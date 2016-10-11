@@ -26,6 +26,10 @@ VirtualProcessor::VirtualProcessor( void )
 	InstructionsMap["mod"] = 8;
 	InstructionsMap["print"] = 9;
 	InstructionsMap["exit"] = 10;
+	// bonus
+	InstructionsMap["sin"] = 11;
+	InstructionsMap["cos"] = 12;
+	InstructionsMap["tan"] = 13;
 
 	// set pointers function array
 	Process[0] = &VirtualProcessor::ProcessPush;
@@ -39,7 +43,9 @@ VirtualProcessor::VirtualProcessor( void )
 	Process[8] = &VirtualProcessor::ProcessMod;
 	Process[9] = &VirtualProcessor::ProcessPrint;
 	Process[10] = &VirtualProcessor::ProcessExit;
-
+	Process[11] = &VirtualProcessor::ProcessSin;
+	Process[12] = &VirtualProcessor::ProcessCos;
+	Process[13] = &VirtualProcessor::ProcessTan;
 
 	std::cout << KGRN "Virtual processor Ready" KRESET << std::endl;
 }
@@ -83,7 +89,7 @@ void					VirtualProcessor::InstructionsReception()
 	}
 	if (ExitInstructionReceived == false)
 	{
-		throw NoExit("Error: No \"exit\" instruction received in program");
+		throw NoExit("No \"exit\" instruction received in program");
 	}
 }
 
@@ -107,17 +113,14 @@ void				VirtualProcessor::ProcessPop(t_MachineInstruction &CurInstr)
 	}
 	else
 	{
-		throw EmptyStack("Error: Pop operation on empty stack");
+		throw EmptyStack("Pop operation on empty stack");
 	}
 }
 
 void				VirtualProcessor::ProcessDump(t_MachineInstruction &CurInstr) // leger pb de fuite here.
 {
-	//std::cout << "Processing dump on the machine" << std::endl;
-	std::list<IOperand const*> listclone = VMSettings->MachineStack;
-	
-	for (std::list<IOperand const*>::const_iterator it = listclone.begin();
-			it != listclone.end(); it++)
+	for (std::list<IOperand const*>::const_iterator it = VMSettings->MachineStack.begin();
+			it != VMSettings->MachineStack.end(); it++)
 	{
 		std::cout << (*it)->toString() << std::endl;
 	}
@@ -142,7 +145,7 @@ void				VirtualProcessor::ProcessAssert(t_MachineInstruction &CurInstr)
 		if (CurInstr.ValueOperandType != (*val1).getType()
 			|| lhsVal != rhsVal)
 		{
-			throw FalseAssertion("Error: Assertion is not true");
+			throw FalseAssertion("Assertion is not true");
 		}
 		else
 		{
@@ -151,7 +154,7 @@ void				VirtualProcessor::ProcessAssert(t_MachineInstruction &CurInstr)
 	}
 	else
 	{
-		throw EmptyStack("Error: Assert operation on empty stack");
+		throw EmptyStack("Assert operation on empty stack");
 	}
 }
 
@@ -176,7 +179,7 @@ void				VirtualProcessor::ProcessAdd(t_MachineInstruction &CurInstr)
 	}
 	else
 	{
-		throw StackLessThanTwo("Error: Stack must have at least two values to perform \"add\" operation");
+		throw StackLessThanTwo("Stack must have at least two values to perform \"add\" operation");
 	}
 }
 
@@ -201,7 +204,7 @@ void				VirtualProcessor::ProcessSub(t_MachineInstruction &CurInstr)
 	}
 	else
 	{
-		throw StackLessThanTwo("Error: Stack must have at least two values to perform \"sub\" operation");
+		throw StackLessThanTwo("Stack must have at least two values to perform \"sub\" operation");
 	}
 }
 
@@ -226,7 +229,7 @@ void				VirtualProcessor::ProcessMul(t_MachineInstruction &CurInstr)
 	}
 	else
 	{
-		throw StackLessThanTwo("Error: Stack must have at least two values to perform \"mul\" operation");
+		throw StackLessThanTwo("Stack must have at least two values to perform \"mul\" operation");
 	}
 }
 
@@ -251,7 +254,7 @@ void				VirtualProcessor::ProcessDiv(t_MachineInstruction &CurInstr)
 		{
 			delete val1;
 			delete val2;
-			throw ZeroDiv("Error: Division by zero is impossible");
+			throw ZeroDiv("Division by zero is impossible");
 		}
 		retVal = *val2 / *val1;
 		delete val1;
@@ -260,7 +263,7 @@ void				VirtualProcessor::ProcessDiv(t_MachineInstruction &CurInstr)
 	}
 	else
 	{
-		throw StackLessThanTwo("Error: Stack must have at least two values to perform \"div\" operation");
+		throw StackLessThanTwo("Stack must have at least two values to perform \"div\" operation");
 	}
 }
 
@@ -284,7 +287,7 @@ void				VirtualProcessor::ProcessMod(t_MachineInstruction &CurInstr)
 		{
 			delete val1;
 			delete val2;
-			throw ZeroDiv("Error: Division by zero is impossible");
+			throw ZeroDiv("Division by zero is impossible");
 		}
 		retVal = *val2 % *val1;
 		delete val1;
@@ -293,7 +296,7 @@ void				VirtualProcessor::ProcessMod(t_MachineInstruction &CurInstr)
 	}
 	else
 	{
-		throw StackLessThanTwo("Error: Stack must have at least two values to perform \"mod\" operation");
+		throw StackLessThanTwo("Stack must have at least two values to perform \"mod\" operation");
 	}
 }
 
@@ -309,12 +312,12 @@ void				VirtualProcessor::ProcessPrint(t_MachineInstruction &CurInstr)
 		}
 		else
 		{
-			throw NotAnInteger8("Error: Value to print is not an int8");
+			throw NotAnInteger8("Value to print is not an int8");
 		}
 	}
 	else
 	{
-		throw EmptyStack("Error: Print operation on empty stack");
+		throw EmptyStack("Print operation on empty stack");
 	}
 }
 
@@ -324,6 +327,93 @@ void				VirtualProcessor::ProcessExit(t_MachineInstruction &CurInstr)
 	ExitInstructionReceived = true;
 }
 
+void				VirtualProcessor::ProcessSin(t_MachineInstruction &CurInstr)
+{
+	const IOperand			*val1;
+	const IOperand			*retVal;
+	double					Val;
+	std::stringstream		ss;
+
+	//std::cout << "Processing sin on the machine" << std::endl;
+	if (VMSettings->MachineStack.size() >= 1)
+	{
+		val1 = VMSettings->MachineStack.front();
+		VMSettings->MachineStack.pop_front();
+		if ((*val1).getType() != Double)
+		{
+			throw NotADouble("\"sin\" operation on non double value");
+		}
+
+		Val = std::strtod((*val1).StringValue.c_str(), 0);
+		Val = sin(Val);
+		ss << Val;
+		retVal = IOperandController::Instance().createOperand(Double, ss.str());
+		delete val1;
+		VMSettings->MachineStack.push_front(retVal);
+	}
+	else
+	{
+		throw EmptyStack("\"sin\" operation on empty stack");
+	}
+}
+
+void				VirtualProcessor::ProcessCos(t_MachineInstruction &CurInstr)
+{
+	const IOperand			*val1;
+	const IOperand			*retVal;
+	double					Val;
+	std::stringstream		ss;
+
+	//std::cout << "Processing cos on the machine" << std::endl;
+	if (VMSettings->MachineStack.size() >= 1)
+	{
+		val1 = VMSettings->MachineStack.front();
+		VMSettings->MachineStack.pop_front();
+		if ((*val1).getType() != Double)
+		{
+			throw NotADouble("\"cos\" operation on non double value");
+		}
+		Val = std::strtod((*val1).StringValue.c_str(), 0);
+		Val = cos(Val);
+		ss << Val;
+		retVal = IOperandController::Instance().createOperand(Double, ss.str());
+		delete val1;
+		VMSettings->MachineStack.push_front(retVal);
+	}
+	else
+	{
+		throw EmptyStack("\"cos\" operation on empty stack");
+	}
+}
+
+void				VirtualProcessor::ProcessTan(t_MachineInstruction &CurInstr)
+{
+	const IOperand			*val1;
+	const IOperand			*retVal;
+	double					Val;
+	std::stringstream		ss;
+
+	//std::cout << "Processing cos on the machine" << std::endl;
+	if (VMSettings->MachineStack.size() >= 1)
+	{
+		val1 = VMSettings->MachineStack.front();
+		VMSettings->MachineStack.pop_front();
+		if ((*val1).getType() != Double)
+		{
+			throw NotADouble("\"tan\" operation on non double value");
+		}
+		Val = std::strtod((*val1).StringValue.c_str(), 0);
+		Val = tan(Val);
+		ss << Val;
+		retVal = IOperandController::Instance().createOperand(Double, ss.str());
+		delete val1;
+		VMSettings->MachineStack.push_front(retVal);
+	}
+	else
+	{
+		throw EmptyStack("\"tan\" operation on empty stack");
+	}
+}
 
 // getters / setters
 
@@ -332,6 +422,6 @@ void				VirtualProcessor::LinkVMSettings(t_avm *VMSettings)
 	this->VMSettings = VMSettings;
 	if (!this->VMSettings)
 	{
-		throw NullvarDetected("Error: Null variable detected");
+		throw NullvarDetected("Null variable detected");
 	}
 }

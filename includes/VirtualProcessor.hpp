@@ -16,7 +16,7 @@ class VirtualProcessor
 {
 	typedef void					(VirtualProcessor::*VPFunctions)
 										(t_MachineInstruction &CurInst);
-	VPFunctions						Process[11];
+	VPFunctions						Process[14];
 	std::map<std::string, int>		InstructionsMap;
 	bool							ExitInstructionReceived;
 
@@ -42,6 +42,10 @@ class VirtualProcessor
 	void					ProcessMod(t_MachineInstruction &CurInstr);
 	void					ProcessPrint(t_MachineInstruction &CurInstr);
 	void					ProcessExit(t_MachineInstruction &CurInstr);
+	// bonus
+	void					ProcessSin(t_MachineInstruction &CurInstr);
+	void					ProcessCos(t_MachineInstruction &CurInstr);
+	void					ProcessTan(t_MachineInstruction &CurInstr);
 	
 	//getters / setters
 	void					LinkVMSettings(t_avm *VMSettings);

@@ -31,6 +31,7 @@ class VMController
 		void					InitDictionnaries();
 		int						Run(int argc, char **argv);
 
+		int						PrintException(std::runtime_error &e);
 		// Getters/Setters
 		void					SetVMSettings(t_avm &Settings);
 

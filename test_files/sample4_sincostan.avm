@@ -1,0 +1,13 @@
+push double(4)
+sin
+dump
+pop
+push double(4)
+cos
+dump
+pop
+push double(4)
+tan
+dump
+pop
+exit

@@ -162,6 +162,5 @@ IOperand const				*Int16::operator%( IOperand const & rhs ) const
 	
 std::string const			&Int16::toString( void ) const
 {
-	std::string const &retval = *(new std::string(this->StringValue));
-	return ((retval));
+	return (this->StringValue);
 }
