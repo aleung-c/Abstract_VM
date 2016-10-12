@@ -145,7 +145,7 @@ void				InputController::LexInput()
 			CurToken.Value = splittedString;
 			CurToken.LineNumber = lineNumber;
 			CurToken.NumberInLine = numberInLine;
-			if (std::regex_match (splittedString, std::regex("^[A-Za-z0-9]+\\([-+]?[0-9]*\\.?[0-9]*\\)$")))
+			if (std::regex_match (splittedString, std::regex("^[A-Za-z0-9]+\\([-]?[0-9]*\\.?[0-9]*\\)$")))
 			{
 				CurToken.TokenType = Value;
 			}
@@ -365,7 +365,7 @@ void				InputController::ParseValuesRules(std::list<t_token>::iterator it, int *
 	char							*valueType;
 	std::string						valueString;
 	std::smatch						match;
-	std::regex 						regex("\\(([-+]?[0-9]*\\.?[0-9]*)\\)$");
+	std::regex 						regex("\\(([-]?[0-9]*\\.?[0-9]*)\\)$");
 	std::string						tmpValue;
 
 

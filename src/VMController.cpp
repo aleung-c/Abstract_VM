@@ -168,7 +168,7 @@ int					VMController::Run(int argc, char **argv)
 
 int			VMController::PrintException(std::runtime_error &e)
 {
-	std::cout << KRED << "Error: " << KRESET << e.what() << std::endl;
+	std::cout << KRED << "Exception: " << KRESET << e.what() << std::endl;
 	return (-1);
 }
 
